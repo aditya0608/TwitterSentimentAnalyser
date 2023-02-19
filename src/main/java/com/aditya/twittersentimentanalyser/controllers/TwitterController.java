@@ -1,13 +1,11 @@
 package com.aditya.twittersentimentanalyser.controllers;
 
+import com.aditya.twittersentimentanalyser.model.SearchKeyWords;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,23 +14,23 @@ import java.util.List;
 @RequestMapping("/twitter")
 public class TwitterController {
 
-    @GetMapping("/{wordLimit}/{duration}/{durationSpecification}")
+    @GetMapping("/tweets/{wordLimit}/{duration}/{durationSpecification}")
     public ResponseEntity<List<String>> getTopTweets(@PathVariable int wordLimit, @PathVariable int duration, @PathVariable String durationSpecification)
     {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
-    @GetMapping("/{words}")
-    public ResponseEntity<List<String>> getTopTweets(@PathVariable List<String> words)
+    @GetMapping("/tweets/searchKeyWords")
+    public ResponseEntity<List<String>> getTopTweets(@RequestBody SearchKeyWords words)
     {
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
-    @GetMapping
-    public ResponseEntity<String> getTweets()
+    @GetMapping("/tweets/{userId}")
+    public ResponseEntity<String> getTweetsByUserId(@PathVariable String userId)
     {
         return new ResponseEntity<>("tweet one",HttpStatus.ACCEPTED);
     }
-    @GetMapping("/tweetOne")
-    public ResponseEntity<String> getTweet()
+    @GetMapping("/tweets/")
+    public ResponseEntity<String> getTweet(@RequestParam(name="geoCode",required = true) String geoCode)
     {
         return new ResponseEntity<>("tweet one",HttpStatus.ACCEPTED);
     }
